@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.automoder.momright"
+    namespace = "com.automoder.wayhome"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.automoder.momright"
+        applicationId = "com.automoder.wayhome"
         minSdk = 28
         targetSdk = 35
         versionCode = 1

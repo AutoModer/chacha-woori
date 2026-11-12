@@ -1,4 +1,4 @@
-package com.automoder.momright
+package com.automoder.wayhome
 
 import android.app.Activity
 import android.os.Bundle
