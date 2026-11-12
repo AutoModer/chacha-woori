@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>퇴근길 — 화면 시안</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Pretendard", "Malgun Gothic", sans-serif; background: #e6e8ec; color: #222; padding: 32px; }
+  h1 { font-size: 26px; margin-bottom: 6px; }
+  h2 { font-size: 20px; margin: 36px 0 6px; }
+  .note { color: #666; font-size: 14px; margin-bottom: 8px; }
+  .flow { color: #2f5d8a; font-size: 14px; margin-bottom: 14px; }
+  .row { display: flex; flex-wrap: wrap; gap: 28px; }
+  .cap { font-size: 14px; color: #555; margin-top: 8px; max-width: 880px; }
+
+  /* 차량 화면 (16:9, 다크) */
+  .car { width: 880px; height: 495px; background: #14171d; color: #f2f2f2; border-radius: 14px; display: flex; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,.25); position: relative; }
+  .car nav { width: 120px; background: #0d0f14; display: flex; flex-direction: column; padding-top: 24px; }
+  .car nav div { height: 96px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 15px; color: #8a8f99; gap: 6px; }
+  .car nav div b { font-size: 30px; font-weight: normal; }
+  .car nav .on { color: #ffb24a; border-left: 4px solid #ffb24a; }
+  .car main { flex: 1; padding: 30px 36px; display: flex; flex-direction: column; gap: 18px; }
+  .car .big { font-size: 34px; font-weight: 700; }
+  .car .mid { font-size: 22px; color: #c9ccd3; }
+  .car .card { background: #222630; border-radius: 12px; padding: 18px 22px; }
+  .car .cols { display: flex; gap: 18px; flex: 1; }
+  .car .cols > * { flex: 1; }
+  .car .btn { background: #ffb24a; color: #14171d; font-size: 28px; font-weight: 700; text-align: center; padding: 20px; border-radius: 14px; }
+  .car .ghost { border: 2px solid #3a3e48; color: #f2f2f2; font-size: 26px; text-align: center; padding: 18px; border-radius: 14px; }
+  .car .ghost.sel { border-color: #ffb24a; background: #3a2a14; color: #ffd08a; font-weight: 700; }
+  .car .label { font-size: 16px; color: #8a8f99; margin-bottom: 8px; }
+  .car .soft { color: #8a8f99; font-size: 17px; }
+  .car .tag { display: inline-block; background: #3a2a14; color: #ffd08a; border-radius: 8px; padding: 4px 10px; font-size: 15px; margin-left: 10px; vertical-align: middle; }
+  .car .msg { display: flex; gap: 14px; align-items: center; font-size: 20px; padding: 9px 0; border-bottom: 1px solid #2c303a; }
+  .car .msg:last-child { border-bottom: none; }
+  .car .who { width: 42px; height: 42px; border-radius: 50%; background: #3a2a14; color: #ffd08a; display: flex; align-items: center; justify-content: center; font-size: 17px; flex: none; }
+  .car .play { width: 48px; height: 48px; border-radius: 50%; border: 2px solid #ffb24a; color: #ffb24a; display: flex; align-items: center; justify-content: center; font-size: 18px; flex: none; }
+  .car .video { border-radius: 12px; position: relative; overflow: hidden; background: linear-gradient(135deg, #4a5a78, #2a2f3a); }
+  .car .video .center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .car .video .bigplay { width: 84px; height: 84px; font-size: 32px; background: rgba(0,0,0,.35); }
+  .car .video .sub { position: absolute; left: 22px; bottom: 18px; font-size: 26px; text-shadow: 0 1px 4px rgba(0,0,0,.6); }
+  .car .video .time { position: absolute; right: 18px; top: 14px; font-size: 16px; color: #ddd; }
+  .car .wave { display: flex; gap: 6px; align-items: center; height: 60px; }
+  .car .wave i { width: 8px; background: #ffb24a; border-radius: 4px; }
+  .car .set { display: flex; justify-content: space-between; align-items: center; font-size: 21px; padding: 12px 0; border-bottom: 1px solid #2c303a; }
+  .car .sw { width: 64px; height: 34px; border-radius: 17px; background: #ffb24a; position: relative; }
+  .car .sw::after { content: ""; position: absolute; right: 4px; top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #14171d; }
+  .car .sw.off { background: #3a3e48; }
+  .car .sw.off::after { left: 4px; right: auto; background: #8a8f99; }
+  .car .gear { position: absolute; right: 22px; top: 18px; font-size: 15px; color: #8a8f99; }
+
+  /* 휴대폰 화면 (세로, 라이트) */
+  .phone { width: 300px; height: 630px; background: #f7f8fb; border-radius: 34px; border: 10px solid #222; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+  .phone header { padding: 22px 20px 10px; font-size: 20px; font-weight: 700; }
+  .phone .body { flex: 1; padding: 0 16px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .phone .card { background: #fff; border-radius: 14px; padding: 12px 14px; box-shadow: 0 1px 4px rgba(0,0,0,.08); font-size: 14px; }
+  .phone .t { font-size: 12px; color: #999; }
+  .phone .hl { color: #2f6fb0; font-weight: 700; }
+  .phone .btn { background: #2f6fb0; color: #fff; text-align: center; padding: 13px; border-radius: 12px; font-weight: 700; font-size: 15px; }
+  .phone .btn.light { background: #e3edf8; color: #2f6fb0; }
+  .phone .me { align-self: flex-end; background: #2f6fb0; color: #fff; border-radius: 14px 14px 4px 14px; padding: 9px 12px; font-size: 14px; max-width: 80%; }
+  .phone .dad { align-self: flex-start; background: #fff; border-radius: 14px 14px 14px 4px; padding: 9px 12px; font-size: 14px; max-width: 80%; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .phone .sys { align-self: center; background: #fff3e0; color: #b26a00; border-radius: 10px; padding: 6px 10px; font-size: 12px; text-align: center; }
+  .phone .line { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid #eef0f4; font-size: 13px; }
+  .phone .ok { color: #2e9d57; font-size: 12px; }
+  .phone .no { color: #bbb; font-size: 12px; }
+  .phone .mic { width: 70px; height: 70px; border-radius: 50%; background: #2f6fb0; color: #fff; font-size: 28px; display: flex; align-items: center; justify-content: center; margin: 4px auto; }
+  .phone .tab { display: flex; border-top: 1px solid #eee; background: #fff; }
+  .phone .tab div { flex: 1; text-align: center; padding: 10px 0 14px; font-size: 11px; color: #aaa; }
+  .phone .tab .on { color: #2f6fb0; font-weight: 700; }
+  .phone .chip { display: inline-block; background: #e3edf8; color: #2f6fb0; border-radius: 10px; padding: 3px 8px; font-size: 11px; }
+  .phone .input { background: #fff; border: 1px solid #dde2ea; border-radius: 12px; padding: 11px 12px; font-size: 14px; }
+  .phone .map { height: 300px; border-radius: 14px; position: relative; overflow: hidden; background:
+      linear-gradient(90deg, transparent 48%, #fff 48%, #fff 52%, transparent 52%),
+      linear-gradient(0deg, transparent 30%, #fff 30%, #fff 34%, transparent 34%),
+      linear-gradient(160deg, #dfe8d8, #e9eef4); }
+  .phone .map .route { position: absolute; left: 40px; top: 40px; width: 180px; height: 200px; border: 5px solid #2f6fb0; border-color: #2f6fb0 #2f6fb0 transparent transparent; border-radius: 0 60px 0 0; }
+  .phone .map .car-pin { position: absolute; left: 196px; top: 120px; width: 30px; height: 30px; border-radius: 50%; background: #ff8a00; border: 4px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,.3); }
+  .phone .map .stop { position: absolute; left: 208px; top: 196px; background: #fff; border-radius: 8px; padding: 3px 7px; font-size: 11px; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+  .phone .map .home { position: absolute; left: 30px; top: 228px; background: #fff; border-radius: 8px; padding: 3px 7px; font-size: 11px; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+  .phone .thumb { height: 120px; border-radius: 10px; background: linear-gradient(135deg, #a9c3e3, #7d98bd); position: relative; }
+  .phone .thumb span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 30px; }
+</style>
+</head>
+<body>
+
+<h1>퇴근길 — 화면 시안</h1>
+<p class="note">차량 화면은 정차(기어 P) 중에 보인다. 주행 중에는 화면 없이 목소리로만 묻고 답한다. 큰 글씨, 한 화면에 한 가지.</p>
+<p class="note">가족 앱은 제안만 한다. 위치 공유·경로 변경은 운전자가 "응" 해야 실행된다. 이름(지은)과 장소(OO치킨)는 예시.</p>
+
+<h2>차량 앱</h2>
+<p class="flow">흐름: 시동 → ① 홈 (출발 인사 영상) → 기어 D: 영상 멈춤 → (주행 중: 메시지 낭독 + 음성 질문, ② 질문 화면은 정차 때만) → 도착, 기어 P → ③ 도착 인사 + 메시지함</p>
+<div class="row">
+
+  <div>
+    <div class="car">
+      <nav><div class="on"><b>⌂</b>홈</div><div><b>✉</b>메시지</div><div><b>♪</b>가족 목소리</div><div><b>⚙</b>설정</div></nav>
+      <main>
+        <span class="gear">기어 P · 07:42</span>
+        <div class="cols">
+          <div class="video" style="flex:1.6">
+            <span class="time">0:12</span>
+            <div class="center"><div class="play bigplay">▶</div></div>
+            <div class="sub">"아빠 오늘도 화이팅~"</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:14px">
+            <div class="card"><div class="label">오늘 목적지</div><div class="mid">회사 · 약 55분</div></div>
+            <div class="card"><div class="label">가족 한마디</div><div class="mid">지은 · 아내</div><div class="soft" style="margin-top:6px">출발 인사 영상 2개</div></div>
+            <div class="ghost">건너뛰기</div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <p class="cap">① 홈 — 시동 직후(기어 P) 가족 출발 인사 영상 자동 재생 (D1). 기어 D로 바꾸면 즉시 멈춘다 (D3). 출발을 막지 않고, 건너뛰기 버튼은 크게.</p>
+  </div>
+
+  <div>
+    <div class="car">
+      <nav><div><b>⌂</b>홈</div><div class="on"><b>✉</b>메시지</div><div><b>♪</b>가족 목소리</div><div><b>⚙</b>설정</div></nav>
+      <main>
+        <span class="gear">듣는 중…</span>
+        <div class="card" style="display:flex; gap:16px; align-items:center">
+          <div class="who" style="width:56px;height:56px;font-size:22px">지</div>
+          <div><div class="mid">지은이가 보냈어요</div><div class="big" style="font-size:30px">"아빠 올 때 치킨 사 와"</div></div>
+        </div>
+        <div class="card" style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:10px">
+          <div class="big">OO치킨 들렀다 갈까요?<span class="tag">경유지</span></div>
+          <div class="soft">도착 시간 약 +8분 · 집은 그대로 목적지</div>
+          <div class="wave"><i style="height:20px"></i><i style="height:42px"></i><i style="height:30px"></i><i style="height:54px"></i><i style="height:26px"></i><i style="height:38px"></i><span class="soft" style="margin-left:12px">"응", "아니"로 대답하세요</span></div>
+        </div>
+        <div style="display:flex; gap:18px"><div class="btn" style="flex:1">응, 들렀다 갈게</div><div class="ghost" style="flex:1">아니</div></div>
+      </main>
+    </div>
+    <p class="cap">② 묻기 — 메시지 낭독 후 질문 하나 (A2, B1, B5, B6). <b>주행 중에는 이 화면 없이 같은 내용을 음성으로만</b> 묻고 음성으로 답한다. 버튼은 정차 중·음성인식 실패 시 대체용. 응답이 없으면 "나중에"로 처리.</p>
+  </div>
+
+  <div>
+    <div class="car">
+      <nav><div><b>⌂</b>홈</div><div class="on"><b>✉</b>메시지</div><div><b>♪</b>가족 목소리</div><div><b>⚙</b>설정</div></nav>
+      <main>
+        <span class="gear">기어 P · 도착 19:23</span>
+        <div class="cols">
+          <div class="video" style="flex:1.3">
+            <span class="time">0:10</span>
+            <div class="center"><div class="play bigplay">▶</div></div>
+            <div class="sub">"오늘도 고생했어"</div>
+          </div>
+          <div class="card" style="display:flex; flex-direction:column">
+            <div class="label">오늘 받은 메시지</div>
+            <div class="msg"><div class="who">지</div><div>"아빠 어디야?"<div class="soft">위치 공유함 · 도착하며 종료</div></div></div>
+            <div class="msg"><div class="who">지</div><div>"아빠 올 때 치킨 사 와"<div class="soft">OO치킨 들름</div></div></div>
+            <div class="msg"><div class="who">아</div><div>영상 1개<div class="soft">주행 중 받음</div></div><div class="play" style="margin-left:auto">▶</div></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <p class="cap">③ 도착 — 목적지 도착 + 기어 P에서 도착 인사 영상 (D2). 시동을 끄면 화면이 꺼지므로 끄기 직전이 아니라 도착 직후. 주행 중 받은 영상·긴 메시지는 여기서 본다 (A4). 운전 점수·기록은 보여 주지 않는다.</p>
+  </div>
+
+  <div>
+    <div class="car">
+      <nav><div><b>⌂</b>홈</div><div><b>✉</b>메시지</div><div><b>♪</b>가족 목소리</div><div class="on"><b>⚙</b>설정</div></nav>
+      <main>
+        <div class="big">설정</div>
+        <div class="card" style="flex:1">
+          <div class="set"><span>주행 중 메시지 읽어 주기</span><div class="sw"></div></div>
+          <div class="set"><span>위치 공유는 매번 묻기</span><div class="sw"></div></div>
+          <div class="set"><span>퇴근길에는 자동으로 위치 공유</span><div class="sw off"></div></div>
+          <div class="set"><span>졸릴 때 가족 목소리로 깨우기</span><div class="sw"></div></div>
+          <div class="set"><span>가족 연결 (QR)</span><span class="soft">지은 · 아내 연결됨</span></div>
+        </div>
+      </main>
+    </div>
+    <p class="cap">④ 설정 — 운전자가 켜고 끈다. 자동 위치 공유(C3)는 기본 꺼짐. 가족 연결은 차량 화면 QR을 가족 앱으로 찍어서 (F1).</p>
+  </div>
+
+</div>
+
+<h2>가족 앱 (휴대폰)</h2>
+<p class="flow">흐름: ① 대화 (메시지·음성 보내기, 결과 알림) → ② 장소 붙이기 → ③ 아빠 위치 (공유 중일 때만) → ④ 영상·목소리 녹화</p>
+<div class="row">
+
+  <div>
+    <div class="phone">
+      <header>아빠 🚗 <span class="chip">운전 중</span></header>
+      <div class="body">
+        <div class="me">🎤 "아빠 어디야?" 0:02</div>
+        <div class="sys">아빠가 위치를 공유했어요 · 도착 예정 19:20</div>
+        <div class="me">아빠 올 때 치킨 사 와<br><span style="font-size:12px">📍 OO치킨</span></div>
+        <div class="sys">아빠가 경로에 OO치킨을 넣었어요</div>
+        <div class="dad">🎤 "알았어, 반반으로 살게" 0:03</div>
+        <div style="flex:1"></div>
+        <div style="display:flex; gap:8px; align-items:center; padding-bottom:10px"><div class="input" style="flex:1">메시지 입력</div><div class="mic" style="width:44px;height:44px;font-size:18px;margin:0">🎤</div></div>
+      </div>
+      <div class="tab"><div class="on">대화</div><div>위치</div><div>영상·목소리</div><div>설정</div></div>
+    </div>
+    <p class="cap">① 대화 — 글·음성 보내기, 차량에서 일어난 일(위치 공유, 경로 변경, 도착)이 알림으로 보인다 (F2, F7, B7).</p>
+  </div>
+
+  <div>
+    <div class="phone">
+      <header>장소 붙이기</header>
+      <div class="body">
+        <div class="input">아빠 올 때 치킨 사 와</div>
+        <div class="card"><span class="hl">✨ "치킨"이 보여요.</span> 아빠 퇴근 경로 근처 가게를 붙이면 아빠에게 들렀다 갈지 물어봐요.</div>
+        <div class="card">
+          <div class="line"><span><b>OO치킨 역삼점</b><br><span class="t">경로에서 +8분</span></span><span class="chip">선택</span></div>
+          <div class="line"><span>△△치킨 집앞점<br><span class="t">경로에서 +2분</span></span><span class="no">○</span></div>
+          <div class="line" style="border:none"><span>□□통닭<br><span class="t">경로에서 +11분</span></span><span class="no">○</span></div>
+        </div>
+        <div class="btn">OO치킨 붙여서 보내기</div>
+        <div class="btn light">장소 없이 보내기</div>
+      </div>
+      <div class="tab"><div class="on">대화</div><div>위치</div><div>영상·목소리</div><div>설정</div></div>
+    </div>
+    <p class="cap">② 장소 붙이기 — 서버 AI가 장소를 언급한 메시지를 알아채면 후보를 보여 주고, <b>가족이 직접 고른다</b> (F3, 5-1). AI가 임의로 경로를 바꾸지 않는다.</p>
+  </div>
+
+  <div>
+    <div class="phone">
+      <header>아빠 위치 <span class="chip">공유 중</span></header>
+      <div class="body">
+        <div class="map"><div class="route"></div><div class="car-pin"></div><div class="stop">🍗 OO치킨</div><div class="home">🏠 집</div></div>
+        <div class="card"><div class="t">도착 예정</div><div style="font-size:24px; font-weight:700">19:20 <span class="t">· 약 22분</span></div><div class="t" style="margin-top:4px">OO치킨 들렀다 오는 중</div></div>
+        <div class="card t">아빠가 집에 도착하면 공유가 자동으로 끝나요.</div>
+      </div>
+      <div class="tab"><div>대화</div><div class="on">위치</div><div>영상·목소리</div><div>설정</div></div>
+    </div>
+    <p class="cap">③ 아빠 위치 — 아빠가 수락했을 때만 보인다. 도착하면 자동 종료 (C1, C2, F6). 지도는 시안용 그림.</p>
+  </div>
+
+  <div>
+    <div class="phone">
+      <header>영상·목소리</header>
+      <div class="body">
+        <div class="card">
+          <div class="t">출발 인사 영상</div>
+          <div class="thumb"><span>▶</span></div>
+          <div class="t" style="margin-top:6px">"아빠 오늘도 화이팅~" · 0:12</div>
+        </div>
+        <div class="card">
+          <div class="t" style="margin-bottom:4px">가족 목소리 (이럴 때 들려줘요)</div>
+          <div class="line"><span>졸릴 때 "아빠 일어나!!"</span><span class="ok">● 녹음됨</span></div>
+          <div class="line"><span>졸릴 때 "아빠 괜찮아?"</span><span class="ok">● 녹음됨</span></div>
+          <div class="line"><span>오래 운전할 때</span><span class="no">○ 기본 음성</span></div>
+          <div class="line" style="border:none"><span>늦은 퇴근 출발</span><span class="no">○ 기본 음성</span></div>
+        </div>
+        <div class="btn">🎥 도착 인사 찍기</div>
+      </div>
+      <div class="tab"><div>대화</div><div>위치</div><div class="on">영상·목소리</div><div>설정</div></div>
+    </div>
+    <p class="cap">④ 영상·목소리 — 출발·도착 인사 영상 촬영 (F4), 상황별 멘트 녹음 (F5, 5-3). 녹음하지 않은 멘트는 기본 음성. 녹음은 서버에서 자동 보정.</p>
+  </div>
+
+</div>
+
+</body>
+</html>
