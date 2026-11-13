@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.automoder.wayhome"
+    namespace = "com.automoder.chachawoori"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.automoder.wayhome"
+        applicationId = "com.automoder.chachawoori"
         minSdk = 28
         targetSdk = 35
         versionCode = 1
