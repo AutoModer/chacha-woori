@@ -1,4 +1,4 @@
-# 차차, 우리 (Chacha Woori)
+# 차차, 우리 — Bye & By, Us
 
 운전 중인 아빠와 집에 있는 가족을, 휴대폰을 보지 않고도 이어 주는 Pleos Connect 차량용 앱입니다.
 
