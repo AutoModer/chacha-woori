@@ -12,6 +12,7 @@
   .flow { color: #2f5d8a; font-size: 14px; margin-bottom: 14px; }
   .row { display: flex; flex-wrap: wrap; gap: 28px; }
   .cap { font-size: 14px; color: #555; margin-top: 8px; max-width: 880px; }
+  .phone + .cap { max-width: 300px; }
 
   /* 차량 화면 (16:9, 다크) */
   .car { width: 880px; height: 495px; background: #14171d; color: #f2f2f2; border-radius: 14px; display: flex; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,.25); position: relative; }
@@ -27,10 +28,8 @@
   .car .cols > * { flex: 1; }
   .car .btn { background: #ffb24a; color: #14171d; font-size: 28px; font-weight: 700; text-align: center; padding: 20px; border-radius: 14px; }
   .car .ghost { border: 2px solid #3a3e48; color: #f2f2f2; font-size: 26px; text-align: center; padding: 18px; border-radius: 14px; }
-  .car .ghost.sel { border-color: #ffb24a; background: #3a2a14; color: #ffd08a; font-weight: 700; }
   .car .label { font-size: 16px; color: #8a8f99; margin-bottom: 8px; }
   .car .soft { color: #8a8f99; font-size: 17px; }
-  .car .tag { display: inline-block; background: #3a2a14; color: #ffd08a; border-radius: 8px; padding: 4px 10px; font-size: 15px; margin-left: 10px; vertical-align: middle; }
   .car .msg { display: flex; gap: 14px; align-items: center; font-size: 20px; padding: 9px 0; border-bottom: 1px solid #2c303a; }
   .car .msg:last-child { border-bottom: none; }
   .car .who { width: 42px; height: 42px; border-radius: 50%; background: #3a2a14; color: #ffd08a; display: flex; align-items: center; justify-content: center; font-size: 17px; flex: none; }
@@ -42,12 +41,22 @@
   .car .video .time { position: absolute; right: 18px; top: 14px; font-size: 16px; color: #ddd; }
   .car .wave { display: flex; gap: 6px; align-items: center; height: 60px; }
   .car .wave i { width: 8px; background: #ffb24a; border-radius: 4px; }
-  .car .set { display: flex; justify-content: space-between; align-items: center; font-size: 21px; padding: 12px 0; border-bottom: 1px solid #2c303a; }
-  .car .sw { width: 64px; height: 34px; border-radius: 17px; background: #ffb24a; position: relative; }
+  .car .set { display: flex; justify-content: space-between; align-items: center; font-size: 21px; padding: 11px 0; border-bottom: 1px solid #2c303a; }
+  .car .set:last-child { border-bottom: none; }
+  .car .sw { width: 64px; height: 34px; border-radius: 17px; background: #ffb24a; position: relative; flex: none; }
   .car .sw::after { content: ""; position: absolute; right: 4px; top: 4px; width: 26px; height: 26px; border-radius: 50%; background: #14171d; }
   .car .sw.off { background: #3a3e48; }
   .car .sw.off::after { left: 4px; right: auto; background: #8a8f99; }
   .car .gear { position: absolute; right: 22px; top: 18px; font-size: 15px; color: #8a8f99; }
+  /* 주행 중 소리 흐름 */
+  .car .navi { flex: 1; background: linear-gradient(160deg, #1d2a3a, #121820); position: relative; }
+  .car .navi .road { position: absolute; left: 46%; top: 0; bottom: 0; width: 70px; background: #2a3442; }
+  .car .navi .arrow { position: absolute; left: calc(46% + 22px); bottom: 70px; width: 26px; height: 26px; background: #4aa3ff; transform: rotate(45deg); }
+  .car .say { position: absolute; left: 24px; right: 24px; bottom: 22px; background: rgba(20,23,29,.92); border: 1px solid #3a3e48; border-radius: 14px; padding: 14px 18px; display: flex; gap: 14px; align-items: center; }
+  .car .say .mid { font-size: 20px; }
+  .car .steps { width: 300px; background: #0d0f14; padding: 22px 20px; display: flex; flex-direction: column; gap: 12px; font-size: 16px; color: #c9ccd3; }
+  .car .steps b { color: #ffd08a; font-weight: 700; }
+  .car .steps .me { color: #8fd18f; }
 
   /* 휴대폰 화면 (세로, 라이트) */
   .phone { width: 300px; height: 630px; background: #f7f8fb; border-radius: 34px; border: 10px solid #222; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
@@ -59,12 +68,11 @@
   .phone .btn { background: #2f6fb0; color: #fff; text-align: center; padding: 13px; border-radius: 12px; font-weight: 700; font-size: 15px; }
   .phone .btn.light { background: #e3edf8; color: #2f6fb0; }
   .phone .me { align-self: flex-end; background: #2f6fb0; color: #fff; border-radius: 14px 14px 4px 14px; padding: 9px 12px; font-size: 14px; max-width: 80%; }
-  .phone .dad { align-self: flex-start; background: #fff; border-radius: 14px 14px 14px 4px; padding: 9px 12px; font-size: 14px; max-width: 80%; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
   .phone .sys { align-self: center; background: #fff3e0; color: #b26a00; border-radius: 10px; padding: 6px 10px; font-size: 12px; text-align: center; }
   .phone .line { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid #eef0f4; font-size: 13px; }
   .phone .ok { color: #2e9d57; font-size: 12px; }
   .phone .no { color: #bbb; font-size: 12px; }
-  .phone .mic { width: 70px; height: 70px; border-radius: 50%; background: #2f6fb0; color: #fff; font-size: 28px; display: flex; align-items: center; justify-content: center; margin: 4px auto; }
+  .phone .mic { width: 44px; height: 44px; border-radius: 50%; background: #2f6fb0; color: #fff; font-size: 18px; display: flex; align-items: center; justify-content: center; flex: none; }
   .phone .tab { display: flex; border-top: 1px solid #eee; background: #fff; }
   .phone .tab div { flex: 1; text-align: center; padding: 10px 0 14px; font-size: 11px; color: #aaa; }
   .phone .tab .on { color: #2f6fb0; font-weight: 700; }
@@ -76,157 +84,335 @@
       linear-gradient(160deg, #dfe8d8, #e9eef4); }
   .phone .map .route { position: absolute; left: 40px; top: 40px; width: 180px; height: 200px; border: 5px solid #2f6fb0; border-color: #2f6fb0 #2f6fb0 transparent transparent; border-radius: 0 60px 0 0; }
   .phone .map .car-pin { position: absolute; left: 196px; top: 120px; width: 30px; height: 30px; border-radius: 50%; background: #ff8a00; border: 4px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,.3); }
-  .phone .map .stop { position: absolute; left: 208px; top: 196px; background: #fff; border-radius: 8px; padding: 3px 7px; font-size: 11px; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
   .phone .map .home { position: absolute; left: 30px; top: 228px; background: #fff; border-radius: 8px; padding: 3px 7px; font-size: 11px; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
-  .phone .thumb { height: 120px; border-radius: 10px; background: linear-gradient(135deg, #a9c3e3, #7d98bd); position: relative; }
+  .phone .thumb { height: 110px; border-radius: 10px; background: linear-gradient(135deg, #a9c3e3, #7d98bd); position: relative; }
   .phone .thumb span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 30px; }
+  /* 잠금 화면 알림 */
+  .phone.lock { background: linear-gradient(170deg, #36465e, #1b2230); color: #fff; }
+  .phone .clock { text-align: center; font-size: 56px; font-weight: 300; margin-top: 40px; }
+  .phone .date { text-align: center; font-size: 14px; opacity: .8; margin-bottom: 30px; }
+  .phone .notif { background: rgba(255,255,255,.92); color: #222; border-radius: 16px; padding: 12px 14px; font-size: 14px; }
+  .phone .notif .app { font-size: 11px; color: #777; margin-bottom: 4px; }
+</style>
+<style>
+  /* 2026-11-13 추가 */
+  .car .navtop { position: absolute; left: 24px; top: 20px; background: rgba(20,23,29,.92); border-radius: 12px; padding: 10px 14px; font-size: 17px; color: #c9ccd3; }
+  .car .pop { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); width: 680px; background: rgba(34,38,48,.97); border: 1px solid #3a3e48; border-radius: 16px; padding: 18px 22px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+  .car .pophead { display: flex; justify-content: space-between; font-size: 14px; color: #ffb24a; }
+  .car .strip { position: absolute; left: 24px; right: 24px; bottom: 18px; height: 70px; background: rgba(20,23,29,.94); border: 1px solid #3a3e48; border-radius: 14px; padding: 0 16px; display: flex; gap: 14px; align-items: center; }
+  .car .btn3 { display: flex; gap: 14px; }
+  .car .btn3 > div { flex: 1; font-size: 26px; padding: 18px 10px; }
+  .car .btn.call { background: #3a3e48; color: #f2f2f2; }
+  .car .dialog { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 560px; background: #222630; border: 1px solid #3a3e48; border-radius: 16px; padding: 26px 28px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+  .car .dim { position: absolute; inset: 0; background: rgba(0,0,0,.55); }
+  .car .exit { position: absolute; left: 24px; top: 22px; background: rgba(20,23,29,.9); border-radius: 12px; padding: 10px 14px; font-size: 16px; color: #c9ccd3; }
+  .car .exit b { color: #4aa3ff; font-size: 22px; }
+  .car .stage { display: flex; gap: 8px; align-items: center; font-size: 15px; color: #8a8f99; }
+  .car .stage span { padding: 4px 9px; border-radius: 8px; background: #222630; }
+  .car .stage span.on { background: #3a2a14; color: #ffd08a; font-weight: 700; }
+  .car .queue .msg { font-size: 18px; }
+  .phone .attach { display: flex; align-items: center; gap: 8px; background: #e3edf8; color: #2f6fb0; border-radius: 10px; padding: 8px 10px; font-size: 13px; }
+</style>
+<style>
+  /* 스토리보드 (2026-11-13) */
+  .scene { display: grid; grid-template-columns: 70px 470px 1fr 230px; gap: 22px; align-items: center; background: #fff; border-radius: 16px; padding: 18px 22px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .scene .no { font-size: 13px; color: #888; text-align: center; }
+  .scene .no b { display: block; font-size: 30px; color: #222; }
+  .scene .no .gearb { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 8px; font-size: 12px; font-weight: 700; }
+  .gp { background: #e6f4ea; color: #2e7d32; } .gd { background: #e3edf8; color: #2f6fb0; } .goff { background: #eee; color: #777; }
+  .mcar { width: 470px; height: 264px; border-radius: 12px; background: linear-gradient(160deg, #1d2a3a, #121820); position: relative; overflow: hidden; }
+  .mcar.off { background: #0b0d11; }
+  .mcar .road { position: absolute; left: 44%; top: 0; bottom: 0; width: 44px; background: #2a3442; }
+  .mcar .arrow { position: absolute; left: calc(44% + 13px); bottom: 50px; width: 18px; height: 18px; background: #4aa3ff; transform: rotate(45deg); }
+  .mcar .navi-top { position: absolute; left: 12px; top: 10px; background: rgba(13,15,20,.9); color: #c9ccd3; font-size: 12px; padding: 6px 9px; border-radius: 8px; }
+  .mcar .navi-top b { color: #4aa3ff; }
+  .mcar .navi-say { position: absolute; left: 12px; top: 44px; background: rgba(13,15,20,.9); color: #8a8f99; font-size: 11px; padding: 5px 8px; border-radius: 8px; }
+  /* 정차 중: 오른쪽에 붙는 얇은 패널 */
+  .mcar .side { position: absolute; right: 0; top: 0; bottom: 0; width: 150px; background: rgba(20,23,29,.96); border-left: 1px solid #2c303a; padding: 10px; display: flex; flex-direction: column; gap: 7px; color: #f2f2f2; font-size: 12px; }
+  .mcar .side .app { color: #ffb24a; font-size: 10px; }
+  .mcar .side .vid { height: 66px; border-radius: 8px; background: linear-gradient(135deg, #4a5a78, #2a2f3a); display: flex; align-items: center; justify-content: center; color: #ffb24a; font-size: 18px; }
+  .mcar .side .q { font-weight: 700; font-size: 13px; line-height: 1.35; }
+  .mcar .side .bt { display: flex; gap: 4px; }
+  .mcar .side .bt span { flex: 1; text-align: center; border-radius: 6px; padding: 5px 0; font-size: 11px; border: 1px solid #3a3e48; }
+  .mcar .side .bt span.y { background: #ffb24a; color: #14171d; border: none; font-weight: 700; }
+  .mcar .side .li { display: flex; gap: 6px; align-items: center; font-size: 11px; color: #c9ccd3; }
+  .mcar .side .li i { width: 20px; height: 20px; border-radius: 50%; background: #3a2a14; color: #ffd08a; font-style: normal; display: flex; align-items: center; justify-content: center; font-size: 10px; flex: none; }
+  /* 주행 중: 아래 왼쪽 한 줄 칩 */
+  .mcar .chip2 { position: absolute; left: 12px; bottom: 10px; background: rgba(20,23,29,.95); border: 1px solid #3a3e48; border-radius: 20px; padding: 5px 12px 5px 5px; display: flex; gap: 7px; align-items: center; color: #f2f2f2; font-size: 12px; }
+  .mcar .chip2 i { width: 22px; height: 22px; border-radius: 50%; background: #3a2a14; color: #ffd08a; font-style: normal; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+  .mcar .chip2 .w { color: #ffb24a; letter-spacing: 1px; }
+  .mcar .offtxt { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #555; font-size: 14px; }
+  /* 소리 칸 */
+  .sound { display: flex; flex-direction: column; gap: 7px; }
+  .sound .s { padding: 7px 11px; border-radius: 12px; font-size: 14px; line-height: 1.4; max-width: 100%; }
+  .sound .tts { background: #f1f2f5; color: #333; }
+  .sound .fam { background: #fff3e0; color: #8a4b00; border: 1px solid #ffd59e; font-weight: 700; }
+  .sound .nv { background: #f1f2f5; color: #999; font-size: 13px; }
+  .sound .drv { background: #e6f4ea; color: #2e7d32; align-self: flex-start; }
+  .sound .act { color: #2f6fb0; font-size: 13px; }
+  .sound .wh { font-size: 11px; color: #999; margin-right: 6px; font-weight: 400; }
+  .sound h4 { font-size: 16px; margin-bottom: 2px; }
+  .sound .why { font-size: 12px; color: #888; }
+  /* 작은 휴대폰 */
+  .mphone { width: 210px; height: 260px; border-radius: 24px; border: 7px solid #222; background: #f7f8fb; overflow: hidden; display: flex; flex-direction: column; padding: 12px 10px; gap: 7px; font-size: 12px; }
+  .mphone.lock { background: linear-gradient(170deg, #36465e, #1b2230); color: #fff; }
+  .mphone .hd { font-weight: 700; font-size: 13px; }
+  .mphone .bub { align-self: flex-end; background: #2f6fb0; color: #fff; border-radius: 12px 12px 4px 12px; padding: 6px 9px; }
+  .mphone .sys { align-self: center; background: #fff3e0; color: #b26a00; border-radius: 8px; padding: 4px 8px; font-size: 11px; text-align: center; }
+  .mphone .nt { background: rgba(255,255,255,.93); color: #222; border-radius: 12px; padding: 8px 10px; }
+  .mphone .nt small { color: #777; display: block; font-size: 10px; }
+  .mphone .map { flex: 1; border-radius: 10px; position: relative; background: linear-gradient(90deg, transparent 48%, #fff 48%, #fff 52%, transparent 52%), linear-gradient(160deg, #dfe8d8, #e9eef4); }
+  .mphone .map b { position: absolute; left: 60%; top: 40%; width: 16px; height: 16px; border-radius: 50%; background: #ff8a00; border: 3px solid #fff; }
+  .mphone .call { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+  .mphone .call .c { width: 54px; height: 54px; border-radius: 50%; background: #2e9d57; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+  .mphone .none { flex: 1; display: flex; align-items: center; justify-content: center; color: #aaa; text-align: center; }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #555; margin: 4px 0 14px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; }
+  .rules { display: flex; gap: 18px; flex-wrap: wrap; }
+  .rules > div { background: #fff; border-radius: 14px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  .rules p { font-size: 13px; color: #555; margin-top: 8px; max-width: 470px; }
+  /* 실제 Pleos Connect 에뮬레이터 화면(경로 안내 중) 위에 앱 표시를 얹는다 */
+  .mcar { background: url('pleos_navi.jpg') center/cover !important; }
+  .mcar.off { background: #0b0d11 !important; }
+  .mcar .road, .mcar .arrow, .mcar .navi-top, .mcar .navi-say { display: none; }
+  .mcar { height: 358px !important; }
+  .mcar .side { top: 26px; bottom: 0; width: 150px; }
+  .mcar .chip2 { left: auto; right: 64px; top: 36px; bottom: auto; }
+  /* 장면 카드: 차 화면을 크게, 소리는 아래로 (2026-11-13) */
+  .mcar.appscr { background: #14171d !important; }
+  .scene { grid-template-columns: 70px 705px 230px; grid-template-areas: "no car phone" "no sound sound"; align-items: start; max-width: 1100px; }
+  .scene > .no { grid-area: no; align-self: center; }
+  .scene > .mcar { grid-area: car; zoom: 1.5; }
+  .scene > .mphone { grid-area: phone; align-self: center; height: 340px; }
+  .scene > .sound { grid-area: sound; display: flex; flex-direction: column; gap: 7px; }
+  .scene > .sound .s { align-self: flex-start; max-width: 860px; }
+  .scene > .mcar.off { height: 200px !important; }
+  .rules > div { flex: 1 1 480px; }
+  /* 스토리보드 v3: 장면마다 제목 줄 + 세 칸(차 화면 / 들리는 말 / 가족 휴대폰) */
+  .sb { background: #fff; border-radius: 16px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,.06); overflow: hidden; max-width: 1240px; }
+  .sb-head { display: flex; align-items: center; gap: 14px; padding: 14px 22px; border-bottom: 1px solid #eef0f4; }
+  .sb-no { width: 34px; height: 34px; border-radius: 50%; background: #222; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex: none; }
+  .sb-title { font-size: 18px; font-weight: 700; flex: 1; }
+  .sb-tag { font-size: 12px; padding: 3px 9px; border-radius: 8px; font-weight: 700; }
+  .sb-time { font-size: 13px; color: #888; }
+  .sb-body { display: grid; grid-template-columns: 612px 1fr 210px; gap: 22px; padding: 16px 22px 18px; align-items: start; }
+  .sb-col h5 { font-size: 12px; color: #999; font-weight: 600; margin-bottom: 8px; letter-spacing: .5px; }
+  .sb-col .mcar { zoom: 1.3; }
+  .sb-col .mcar.off { height: 160px !important; }
+  .sb-col .mphone { height: 330px; }
+  .say { display: flex; flex-direction: column; gap: 6px; }
+  .say .ln { display: grid; grid-template-columns: 74px 1fr; gap: 8px; align-items: start; font-size: 14px; line-height: 1.45; }
+  .say .ln .w { font-size: 12px; color: #999; padding-top: 6px; text-align: right; }
+  .say .ln .t { padding: 6px 10px; border-radius: 10px; }
+  .say .fam .t { background: #fff3e0; color: #8a4b00; font-weight: 700; border: 1px solid #ffd59e; }
+  .say .tts .t { background: #f1f2f5; color: #333; }
+  .say .drv .t { background: #e6f4ea; color: #2e7d32; font-weight: 700; }
+  .say .nv .t { background: #f6f7f9; color: #aaa; font-size: 13px; }
+  .sb-res { margin-top: 12px; padding-top: 10px; border-top: 1px dashed #e3e5ea; font-size: 13px; color: #2f6fb0; }
+  .sb-res span { color: #999; }
+  /* 앱 화면 (직접 열 때) */
+  .appwrap { display: flex; gap: 22px; flex-wrap: wrap; }
+  .appwrap .car { width: 600px; height: 340px; }
+  .appwrap .car nav { width: 100px; padding-top: 16px; }
+  .appwrap .car nav div { height: 78px; font-size: 13px; }
+  .appwrap .car nav div b { font-size: 24px; }
+  .appwrap .car main { padding: 20px 24px; gap: 12px; }
+  .appwrap .car .big { font-size: 24px; }
+  .appwrap .car .set { font-size: 16px; padding: 8px 0; }
+  .appwrap .car .set small { display: block; font-size: 12px; color: #8a8f99; margin-top: 2px; }
+  .appwrap .car .sw { width: 50px; height: 28px; }
+  .appwrap .car .sw::after { width: 20px; height: 20px; }
+  .appwrap .car .msg { font-size: 15px; padding: 7px 0; }
+  .appwrap .car .who { width: 34px; height: 34px; font-size: 14px; }
+  .appwrap .car .play { width: 36px; height: 36px; font-size: 14px; }
 </style>
 </head>
 <body>
 
+
 <h1>차차, 우리 — 화면 시안</h1>
-<p class="note">차량 화면은 정차(기어 P) 중에 보인다. 주행 중에는 화면 없이 목소리로만 묻고 답한다. 큰 글씨, 한 화면에 한 가지.</p>
-<p class="note">가족 앱은 제안만 한다. 위치 공유·경로 변경은 운전자가 "응" 해야 실행된다. 이름(지은)과 장소(OO치킨)는 예시.</p>
+<p class="note"><b>가족의 목소리를 태워 드립니다.</b> 이 앱의 주인공은 화면이 아니라 <b>소리</b>다. 차 화면은 늘 내장 내비이고, 앱은 내비를 가리지 않게 <b>정차 중엔 오른쪽 얇은 패널</b>, <b>주행 중엔 지도 위쪽 한 줄 칩</b>으로만 보인다. 차 화면은 Pleos Connect 에뮬레이터의 내장 내비 화면(경로 안내 중)을 잘라 쓴 것이다.</p>
+<p class="note">호칭(아빠)·이름(지은)·장소(OO치킨)는 예시.</p>
 
-<h2>차량 앱</h2>
-<p class="flow">흐름: 시동 → ① 홈 (출발 인사 영상) → 기어 D: 영상 멈춤 → (주행 중: 메시지 낭독 + 음성 질문, ② 질문 화면은 정차 때만) → 도착, 기어 P → ③ 도착 인사 + 메시지함</p>
-<div class="row">
-
+<h2>1. 퇴근길 장면 (스토리보드)</h2>
+<div class="legend">
+  <span><i style="background:#fff3e0;border:1px solid #ffd59e"></i>가족 목소리 (녹음 그대로)</span>
+  <span><i style="background:#f1f2f5"></i>차가 하는 말 (TTS)</span>
+  <span><i style="background:#e6f4ea"></i>운전자가 하는 말</span>
+  <span><i style="background:#f6f7f9;border:1px solid #e3e5ea"></i>내장 내비 안내</span>
+</div>
+<div class="sb">
+  <div class="sb-head"><div class="sb-no">1</div><div class="sb-title">낮에 아내가 남긴 말은 차에 모아 둔다</div><span class="sb-time">오후 3:12</span><span class="sb-tag goff">시동 꺼짐</span></div>
+  <div class="sb-body">
+    <div class="sb-col"><h5>차 화면</h5><div class="mcar off"><div class="offtxt">회사 주차장 · 화면 꺼짐</div></div></div>
+    <div class="sb-col"><h5>들리는 말</h5><div class="say"><div class="ln fam"><div class="w">아내</div><div class="t">“여보, 저녁에 비 온대. 우산 챙겨 와”</div></div></div><div class="sb-res">→ 아빠가 운전 중이 아니라서 바로 전하지 않고, 시동을 켤 때 전한다 <span>(A1, A3)</span></div></div>
+    <div class="sb-col"><h5>가족 휴대폰</h5><div class="mphone"><div class="hd">아내 휴대폰</div><div style="flex:1"></div><div class="bub">🎤 "여보, 저녁에 비 온대…" 0:04</div><div class="sys">아빠가 시동을 켜면 들려드릴게요</div></div></div>
+  </div>
+</div>
+<div class="sb">
+  <div class="sb-head"><div class="sb-no">2</div><div class="sb-title">퇴근 시동 — 가족 인사와 밀린 말이 나온다</div><span class="sb-time">오후 6:42</span><span class="sb-tag gp">정차 · 기어 P</span></div>
+  <div class="sb-body">
+    <div class="sb-col"><h5>차 화면</h5><div class="mcar"><div class="side"><div class="app">차차, 우리</div><div class="vid">▶</div><div style="font-size:12px">"아빠 오늘도 고생 많았어~"</div><div class="li"><i>아</i>음성 0:04 · 낮에 옴</div><div class="bt" style="margin-top:auto"><span>📞 전화</span><span>닫기</span></div></div></div></div>
+    <div class="sb-col"><h5>들리는 말</h5><div class="say"><div class="ln fam"><div class="w">인사 영상</div><div class="t">“아빠 오늘도 고생 많았어~”</div></div><div class="ln tts"><div class="w">차</div><div class="t">“아내가 낮에 음성 메시지를 보냈어요.”</div></div><div class="ln fam"><div class="w">아내</div><div class="t">“여보, 저녁에 비 온대. 우산 챙겨 와”</div></div></div><div class="sb-res">→ 장소가 없는 메시지라 묻지 않는다. 필요하면 [전화] <span>(A3, C1)</span></div></div>
+    <div class="sb-col"><h5>가족 휴대폰</h5><div class="mphone"><div class="hd">아내 휴대폰</div><div class="bub">🎤 "여보, 저녁에 비 온대…" 0:04</div><div class="sys">아빠가 들었어요</div><div style="flex:1"></div></div></div>
+  </div>
+</div>
+<div class="sb">
+  <div class="sb-head"><div class="sb-no">3</div><div class="sb-title">내비에 집을 찍고 출발 — 차가 위치 공유를 묻는다</div><span class="sb-time">오후 6:44</span><span class="sb-tag gp">정차 · 기어 P</span></div>
+  <div class="sb-body">
+    <div class="sb-col"><h5>차 화면</h5><div class="mcar"><div class="side"><div class="app">차차, 우리</div><div class="q" style="margin-top:16px">가족에게 위치를 공유할까요?</div><div style="color:#8a8f99;font-size:11px">목적지: 집 · 도착하면 자동으로 끝나요</div><div class="bt" style="margin-top:auto"><span class="y">예</span><span>아니요</span></div><div class="bt"><span>늘 공유</span></div></div></div></div>
+    <div class="sb-col"><h5>들리는 말</h5><div class="say"><div class="ln tts"><div class="w">차</div><div class="t">“가족에게 위치를 공유할까요?”</div></div><div class="ln drv"><div class="w">운전자</div><div class="t">“응”</div></div></div><div class="sb-res">→ 가족에게 "아빠가 출발했어요". 가족 앱에는 위치를 요청하는 버튼이 없다 <span>(B1, B3)</span></div></div>
+    <div class="sb-col"><h5>가족 휴대폰</h5><div class="mphone lock"><div style="text-align:center;font-size:34px;font-weight:300;margin-top:14px">18:44</div><div style="flex:1"></div><div class="nt"><small>차차, 우리 · 지금</small><b>아빠가 출발했어요 🚗</b><br>집까지 약 50분 · 위치 보기</div><div style="height:30px"></div></div></div>
+  </div>
+</div>
+<div class="sb">
+  <div class="sb-head"><div class="sb-no">4</div><div class="sb-title">출발 알림을 본 딸이 저녁 장소를 보낸다</div><span class="sb-time">오후 6:58</span><span class="sb-tag gd">주행 중</span></div>
+  <div class="sb-body">
+    <div class="sb-col"><h5>차 화면</h5><div class="mcar"><div class="chip2"><i>지</i>지은 · 장소 <span class="w">▮▮▮</span></div></div></div>
+    <div class="sb-col"><h5>들리는 말</h5><div class="say"><div class="ln tts"><div class="w">차</div><div class="t">“띵— 지은이가 장소를 보냈어요.”</div></div><div class="ln fam"><div class="w">지은</div><div class="t">“아빠 오늘 치킨 먹자~”</div></div><div class="ln tts"><div class="w">차</div><div class="t">“OO치킨을 목적지로 할까요?”</div></div><div class="ln drv"><div class="w">운전자</div><div class="t">“응”</div></div></div><div class="sb-res">→ 내비 목적지가 OO치킨(들렀다 집)으로 바뀌고 딸에게 결과 알림. 화면은 한 줄 칩뿐 <span>(A2, A4, A5)</span></div></div>
+    <div class="sb-col"><h5>가족 휴대폰</h5><div class="mphone"><div class="hd">딸 휴대폰</div><div class="map" style="flex:none;height:90px"><b></b></div><div class="bub">🎤 "아빠 오늘 치킨 먹자~"<br>📍 OO치킨 역삼점</div><div class="sys">아빠가 OO치킨으로 가요</div></div></div>
+  </div>
+</div>
+<div class="sb">
+  <div class="sb-head"><div class="sb-no">5</div><div class="sb-title">답이 필요한 말이면 "전화해 줘" 한마디</div><span class="sb-time">오후 7:05</span><span class="sb-tag gd">주행 중</span></div>
+  <div class="sb-body">
+    <div class="sb-col"><h5>차 화면</h5><div class="mcar"><div class="chip2"><i>아</i>아내 · 메시지 <span class="w">▮▮▮</span></div></div></div>
+    <div class="sb-col"><h5>들리는 말</h5><div class="say"><div class="ln tts"><div class="w">차</div><div class="t">“띵— 아내가 음성 메시지를 보냈어요.”</div></div><div class="ln fam"><div class="w">아내</div><div class="t">“여보, 마트 왔는데 두부 살까 콩나물 살까?”</div></div><div class="ln tts"><div class="w">차</div><div class="t">“아내에게 전화할까요?”</div></div><div class="ln drv"><div class="w">운전자</div><div class="t">“전화해 줘”</div></div></div><div class="sb-res">→ 아내에게 핸즈프리 통화. 답장 기능은 따로 두지 않는다 <span>(A2, A6)</span></div></div>
+    <div class="sb-col"><h5>가족 휴대폰</h5><div class="mphone"><div class="hd">아내 휴대폰 · 마트</div><div class="call"><div>아빠 🚗</div><div class="c">📞</div><div style="color:#777">전화가 왔어요</div></div></div></div>
+  </div>
+</div>
+<div class="sb">
+  <div class="sb-head"><div class="sb-no">6</div><div class="sb-title">고속도로 — 차선을 바꿔야 할 일은 가족 목소리로 미리</div><span class="sb-time">오후 7:20</span><span class="sb-tag gd">주행 중</span></div>
+  <div class="sb-body">
+    <div class="sb-col"><h5>차 화면</h5><div class="mcar"><div class="chip2"><i>지</i>지은 목소리 <span class="w">▮▮▮</span></div></div></div>
+    <div class="sb-col"><h5>들리는 말</h5><div class="say"><div class="ln nv"><div class="w">내비</div><div class="t">구간단속 구간입니다… 제한속도 100… 전방에 과속 카메라…</div></div><div class="ln tts"><div class="w">차</div><div class="t">“2km 앞 판교 IC 출구예요.”</div></div><div class="ln fam"><div class="w">↳ 이어서 지은</div><div class="t">“아빠, 이번에 오른쪽으로 나가야 돼. 미리 차선 옮겨 두자”</div></div></div><div class="sb-res">→ 차 안내와 지은 목소리는 쉬지 않고 이어서 <b>한 번의 안내</b>로 들린다. 여유 있을 때 한 번, 차선이 안 바뀌면 조금 뒤 한 번 더. 깜빡이를 켜면 끝. 놓치면 "괜찮아, 다음에서 나가면 돼". 이때 온 메시지는 출구를 지난 뒤로 <span>(D1~D4, D6)</span></div></div>
+    <div class="sb-col"><h5>가족 휴대폰</h5><div class="mphone"><div class="hd">딸 휴대폰 · 아빠 위치</div><div class="map"><b></b></div><div style="color:#777">OO치킨 들렀다 · 도착 예정 19:41</div></div></div>
+  </div>
+</div>
+<div class="sb">
+  <div class="sb-head"><div class="sb-no">7</div><div class="sb-title">집 도착 — 가족 인사로 하루를 닫는다</div><span class="sb-time">오후 7:41</span><span class="sb-tag gp">정차 · 기어 P</span></div>
+  <div class="sb-body">
+    <div class="sb-col"><h5>차 화면</h5><div class="mcar"><div class="side"><div class="app">차차, 우리</div><div class="vid">▶</div><div style="font-size:12px">"오늘도 고생했어"</div><div class="li"><i>지</i>치킨 → 목적지로 함</div><div class="li"><i>아</i>두부? → 통화함</div><div style="color:#8a8f99;font-size:11px;margin-top:auto">위치 공유가 끝났어요</div></div></div></div>
+    <div class="sb-col"><h5>들리는 말</h5><div class="say"><div class="ln fam"><div class="w">인사 영상</div><div class="t">“오늘도 고생했어”</div></div></div><div class="sb-res">→ 위치 공유 자동 종료, 가족에게 도착 알림 <span>(C2, B4)</span></div></div>
+    <div class="sb-col"><h5>가족 휴대폰</h5><div class="mphone"><div class="hd">딸 휴대폰</div><div class="sys">아빠가 OO치킨에 들렀어요</div><div class="sys">아빠가 집에 도착했어요 · 공유가 끝났어요</div><div style="flex:1"></div></div></div>
+  </div>
+</div>
+<h2 style="margin-top:22px">다른 날 장면</h2>
+<div class="sb">
+  <div class="sb-head"><div class="sb-no">+</div><div class="sb-title">다른 날 — 오래 달리면 다음 쉼터 앞에서 쉬어 가자고</div><span class="sb-time">주말 장거리</span><span class="sb-tag gd">주행 중</span></div>
+  <div class="sb-body">
+    <div class="sb-col"><h5>차 화면</h5><div class="mcar"><div class="chip2"><i>지</i>지은 목소리 <span class="w">▮▮▮</span></div></div></div>
+    <div class="sb-col"><h5>들리는 말</h5><div class="say"><div class="ln fam"><div class="w">지은(녹음)</div><div class="t">“아빠, 오래 달렸네. 다음 쉼터에서 쉬었다 가자”</div></div></div><div class="sb-res">→ 멍하게 흘려듣던 휴식 안내를 가족 목소리로 깨운다. 졸음 감지가 아니라 휴식 권유, 쉬지 않고 달린 시간 기준 <span>(D5)</span></div></div>
+    <div class="sb-col"><h5>가족 휴대폰</h5><div class="mphone"><div class="hd">가족 휴대폰</div><div class="none">휴식 권유는<br>가족에게 알리지 않아요</div></div></div>
+  </div>
+</div>
+<h2>2. 차 화면에 보이는 방식 (세 가지뿐)</h2>
+<div class="rules">
+  <div>
+    <div class="mcar"><div class="side"><div class="app">차차, 우리</div><div class="vid">▶</div><div class="q">목적지로 할까요?</div><div class="bt"><span class="y">예</span><span>아니요</span><span>📞</span></div></div></div>
+    <p><b>① 정차 중 패널 (기어 P)</b> — 내비 오른쪽에 붙는 얇은 패널. 인사 영상, 질문과 버튼 셋(예 / 아니요 / 전화하기). 기어 D로 바꾸면 접힌다.</p>
+  </div>
+  <div>
+    <div class="mcar"><div class="chip2"><i>지</i>지은 목소리 <span class="w">▮▮▮</span></div></div>
+    <p><b>② 주행 중 칩 (기어 D)</b> — 지도 오른쪽 위에 지금 누구 목소리인지 한 줄만. 내용·질문·답은 모두 소리. 지도는 가리지 않는다.</p>
+  </div>
+</div>
+<p class="note" style="margin-top:14px"><b>③ 앱 화면</b> — 운전자가 앱 아이콘을 눌러 열 때만 보인다(정차 중). 메시지함과 설정 두 칸.</p>
+<div class="appwrap">
   <div>
     <div class="car">
-      <nav><div class="on"><b>⌂</b>홈</div><div><b>✉</b>메시지</div><div><b>♪</b>가족 목소리</div><div><b>⚙</b>설정</div></nav>
+      <nav><div class="on"><b>✉</b>메시지함</div><div><b>⚙</b>설정</div></nav>
       <main>
-        <span class="gear">기어 P · 07:42</span>
-        <div class="cols">
-          <div class="video" style="flex:1.6">
-            <span class="time">0:12</span>
-            <div class="center"><div class="play bigplay">▶</div></div>
-            <div class="sub">"아빠 오늘도 화이팅~"</div>
-          </div>
-          <div style="display:flex; flex-direction:column; gap:14px">
-            <div class="card"><div class="label">오늘 목적지</div><div class="mid">회사 · 약 55분</div></div>
-            <div class="card"><div class="label">가족 한마디</div><div class="mid">지은 · 아내</div><div class="soft" style="margin-top:6px">출발 인사 영상 2개</div></div>
-            <div class="ghost">건너뛰기</div>
-          </div>
+        <div class="big">메시지함</div>
+        <div class="card" style="flex:1; padding:6px 18px">
+          <div class="msg"><div class="who">지</div><div style="flex:1">📍 OO치킨 · "아빠 오늘 치킨 먹자~"<div class="soft" style="font-size:13px">오늘 18:58 · 목적지로 함</div></div><div class="play">▶</div></div>
+          <div class="msg"><div class="who">아</div><div style="flex:1">"마트 왔는데 두부 살까 콩나물 살까?"<div class="soft" style="font-size:13px">오늘 19:05 · 통화함</div></div><div class="play">▶</div></div>
+          <div class="msg"><div class="who">아</div><div style="flex:1">"저녁에 비 온대. 우산 챙겨 와"<div class="soft" style="font-size:13px">오늘 15:12 · 시동 때 들음</div></div><div class="play">▶</div></div>
         </div>
       </main>
     </div>
-    <p class="cap">① 홈 — 시동 직후(기어 P) 가족 출발 인사 영상 자동 재생 (D1). 기어 D로 바꾸면 즉시 멈춘다 (D3). 출발을 막지 않고, 건너뛰기 버튼은 크게.</p>
+    <p class="cap" style="max-width:600px">메시지함 — 받은 메시지를 다시 듣는다. 무엇을 했는지(목적지로 함, 통화함)를 함께 보여 준다 (A8).</p>
   </div>
-
   <div>
     <div class="car">
-      <nav><div><b>⌂</b>홈</div><div class="on"><b>✉</b>메시지</div><div><b>♪</b>가족 목소리</div><div><b>⚙</b>설정</div></nav>
-      <main>
-        <span class="gear">듣는 중…</span>
-        <div class="card" style="display:flex; gap:16px; align-items:center">
-          <div class="who" style="width:56px;height:56px;font-size:22px">지</div>
-          <div><div class="mid">지은이가 보냈어요</div><div class="big" style="font-size:30px">"아빠 올 때 치킨 사 와"</div></div>
-        </div>
-        <div class="card" style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:10px">
-          <div class="big">OO치킨 들렀다 갈까요?<span class="tag">경유지</span></div>
-          <div class="soft">도착 시간 약 +8분 · 집은 그대로 목적지</div>
-          <div class="wave"><i style="height:20px"></i><i style="height:42px"></i><i style="height:30px"></i><i style="height:54px"></i><i style="height:26px"></i><i style="height:38px"></i><span class="soft" style="margin-left:12px">"응", "아니"로 대답하세요</span></div>
-        </div>
-        <div style="display:flex; gap:18px"><div class="btn" style="flex:1">응, 들렀다 갈게</div><div class="ghost" style="flex:1">아니</div></div>
-      </main>
-    </div>
-    <p class="cap">② 묻기 — 메시지 낭독 후 질문 하나 (A2, B1, B5, B6). <b>주행 중에는 이 화면 없이 같은 내용을 음성으로만</b> 묻고 음성으로 답한다. 버튼은 정차 중·음성인식 실패 시 대체용. 응답이 없으면 "나중에"로 처리.</p>
-  </div>
-
-  <div>
-    <div class="car">
-      <nav><div><b>⌂</b>홈</div><div class="on"><b>✉</b>메시지</div><div><b>♪</b>가족 목소리</div><div><b>⚙</b>설정</div></nav>
-      <main>
-        <span class="gear">기어 P · 도착 19:23</span>
-        <div class="cols">
-          <div class="video" style="flex:1.3">
-            <span class="time">0:10</span>
-            <div class="center"><div class="play bigplay">▶</div></div>
-            <div class="sub">"오늘도 고생했어"</div>
-          </div>
-          <div class="card" style="display:flex; flex-direction:column">
-            <div class="label">오늘 받은 메시지</div>
-            <div class="msg"><div class="who">지</div><div>"아빠 어디야?"<div class="soft">위치 공유함 · 도착하며 종료</div></div></div>
-            <div class="msg"><div class="who">지</div><div>"아빠 올 때 치킨 사 와"<div class="soft">OO치킨 들름</div></div></div>
-            <div class="msg"><div class="who">아</div><div>영상 1개<div class="soft">주행 중 받음</div></div><div class="play" style="margin-left:auto">▶</div></div>
-          </div>
-        </div>
-      </main>
-    </div>
-    <p class="cap">③ 도착 — 목적지 도착 + 기어 P에서 도착 인사 영상 (D2). 시동을 끄면 화면이 꺼지므로 끄기 직전이 아니라 도착 직후. 주행 중 받은 영상·긴 메시지는 여기서 본다 (A4). 운전 점수·기록은 보여 주지 않는다.</p>
-  </div>
-
-  <div>
-    <div class="car">
-      <nav><div><b>⌂</b>홈</div><div><b>✉</b>메시지</div><div><b>♪</b>가족 목소리</div><div class="on"><b>⚙</b>설정</div></nav>
+      <nav><div><b>✉</b>메시지함</div><div class="on"><b>⚙</b>설정</div></nav>
       <main>
         <div class="big">설정</div>
-        <div class="card" style="flex:1">
-          <div class="set"><span>주행 중 메시지 읽어 주기</span><div class="sw"></div></div>
-          <div class="set"><span>위치 공유는 매번 묻기</span><div class="sw"></div></div>
-          <div class="set"><span>퇴근길에는 자동으로 위치 공유</span><div class="sw off"></div></div>
-          <div class="set"><span>졸릴 때 가족 목소리로 깨우기</span><div class="sw"></div></div>
-          <div class="set"><span>가족 연결 (QR)</span><span class="soft">지은 · 아내 연결됨</span></div>
+        <div class="card" style="flex:1; padding:4px 18px">
+          <div class="set"><span>운전 중에도 가족 메시지 듣기<small>끄면 정차했을 때 모아서 들려줘요</small></span><div class="sw"></div></div>
+          <div class="set"><span>고속도로 출구 안내를 가족 목소리로<small>차선을 바꿔야 할 때 미리 알려 줘요</small></span><div class="sw"></div></div>
+          <div class="set"><span>오래 달리면 쉬어 가기 알림<small>다음 쉼터 앞에서 가족 목소리로</small></span><div class="sw"></div></div>
+          <div class="set"><span>위치 공유<small>집·가족이 보낸 장소로 갈 때 물어봐요</small></span><span class="soft" style="font-size:13px">늘 공유: 집 ›</span></div>
+          <div class="set" style="border:none"><span>가족 연결</span><span class="soft" style="font-size:13px">지은 · 아내 ›</span></div>
         </div>
       </main>
     </div>
-    <p class="cap">④ 설정 — 운전자가 켜고 끈다. 자동 위치 공유(C3)는 기본 꺼짐. 가족 연결은 차량 화면 QR을 가족 앱으로 찍어서 (F1).</p>
+    <p class="cap" style="max-width:600px">설정 — 켜고 끄기만, 시간·거리 숫자는 보여 주지 않는다. 항목마다 무엇이 달라지는지 한 줄 설명. 가족 연결은 차량 화면 QR을 가족 앱으로 찍어서 (E1).</p>
   </div>
-
 </div>
 
-<h2>가족 앱 (휴대폰)</h2>
-<p class="flow">흐름: ① 대화 (메시지·음성 보내기, 결과 알림) → ② 장소 붙이기 → ③ 아빠 위치 (공유 중일 때만) → ④ 영상·목소리 녹화</p>
+<h2>3. 가족 앱 화면 (휴대폰)</h2>
+<p class="flow">흐름: ① 언제든 보내기 (음성·글 + 장소 선택) → ② 장소 붙이기 → ③ 출발 알림 → ④ 위치 보기 (공유 중일 때만) → ⑤ 인사 영상·멘트 녹음</p>
 <div class="row">
 
   <div>
     <div class="phone">
-      <header>아빠 🚗 <span class="chip">운전 중</span></header>
+      <header>아빠 <span class="chip">운전 중</span></header>
       <div class="body">
-        <div class="me">🎤 "아빠 어디야?" 0:02</div>
-        <div class="sys">아빠가 위치를 공유했어요 · 도착 예정 19:20</div>
-        <div class="me">아빠 올 때 치킨 사 와<br><span style="font-size:12px">📍 OO치킨</span></div>
-        <div class="sys">아빠가 경로에 OO치킨을 넣었어요</div>
-        <div class="dad">🎤 "알았어, 반반으로 살게" 0:03</div>
+        <div class="sys">18:44 · 아빠가 출발했어요 · 위치 보기</div>
+        <div class="me">🎤 "아빠 오늘 치킨 먹자~" 0:03<br><span style="font-size:12px">📍 OO치킨 역삼점</span></div>
+        <div class="sys">아빠가 운전 중이라 바로 들려드려요</div>
+        <div class="sys">18:58 · 아빠가 OO치킨으로 가요</div>
         <div style="flex:1"></div>
-        <div style="display:flex; gap:8px; align-items:center; padding-bottom:10px"><div class="input" style="flex:1">메시지 입력</div><div class="mic" style="width:44px;height:44px;font-size:18px;margin:0">🎤</div></div>
+        <div class="attach">📍 장소 붙이기 <span style="margin-left:auto; color:#999">선택</span></div>
+        <div style="display:flex; gap:8px; align-items:center; padding:8px 0 10px"><div class="input" style="flex:1">메시지 입력</div><div class="mic">🎤</div></div>
       </div>
       <div class="tab"><div class="on">대화</div><div>위치</div><div>영상·목소리</div><div>설정</div></div>
     </div>
-    <p class="cap">① 대화 — 글·음성 보내기, 차량에서 일어난 일(위치 공유, 경로 변경, 도착)이 알림으로 보인다 (F2, F7, B7).</p>
+    <p class="cap">① 보내기 — 언제든 음성이나 글 (A1, E2). 운전 중이면 바로, 아니면 "시동을 켜면 들려드릴게요". 차에서 일어난 일(목적지 변경, 출발, 도착)이 알림으로 보인다 (A7).</p>
   </div>
 
   <div>
     <div class="phone">
       <header>장소 붙이기</header>
       <div class="body">
-        <div class="input">아빠 올 때 치킨 사 와</div>
-        <div class="card"><span class="hl">✨ "치킨"이 보여요.</span> 아빠 퇴근 경로 근처 가게를 붙이면 아빠에게 들렀다 갈지 물어봐요.</div>
+        <div class="input">🔍 OO치킨</div>
         <div class="card">
-          <div class="line"><span><b>OO치킨 역삼점</b><br><span class="t">경로에서 +8분</span></span><span class="chip">선택</span></div>
-          <div class="line"><span>△△치킨 집앞점<br><span class="t">경로에서 +2분</span></span><span class="no">○</span></div>
-          <div class="line" style="border:none"><span>□□통닭<br><span class="t">경로에서 +11분</span></span><span class="no">○</span></div>
+          <div class="line"><span><b>OO치킨 역삼점</b><br><span class="t">아빠 회사에서 집 가는 길 · +8분</span></span><span class="chip">선택</span></div>
+          <div class="line"><span>OO치킨 집앞점<br><span class="t">집에서 300m</span></span><span class="no">○</span></div>
+          <div class="line" style="border:none"><span>OO치킨 선릉점<br><span class="t">+11분</span></span><span class="no">○</span></div>
         </div>
-        <div class="btn">OO치킨 붙여서 보내기</div>
-        <div class="btn light">장소 없이 보내기</div>
+        <div class="card t">아빠가 "응" 하면 목적지가 바뀌어요. 장소는 제안일 뿐, 아빠가 정해요.</div>
+        <div class="btn">OO치킨 붙이기</div>
       </div>
       <div class="tab"><div class="on">대화</div><div>위치</div><div>영상·목소리</div><div>설정</div></div>
     </div>
-    <p class="cap">② 장소 붙이기 — 서버 AI가 장소를 언급한 메시지를 알아채면 후보를 보여 주고, <b>가족이 직접 고른다</b> (F3, 5-1). AI가 임의로 경로를 바꾸지 않는다.</p>
+    <p class="cap">② 장소 붙이기 — <b>가족이 직접 장소를 고른다</b> (A1). 영상은 붙일 수 없다.</p>
+  </div>
+
+  <div>
+    <div class="phone lock">
+      <div class="clock">18:44</div>
+      <div class="date">11월 13일 목요일</div>
+      <div class="body">
+        <div class="notif"><div class="app">차차, 우리 · 지금</div><b>아빠가 출발했어요 🚗</b><br>OO치킨 들렀다 집까지 약 58분 · 눌러서 위치 보기</div>
+      </div>
+    </div>
+    <p class="cap">③ 출발 알림 — 운전자가 차에서 공유를 시작하면 가족에게 알림 (B3). 가족 앱에는 위치 요청 기능이 없다.</p>
   </div>
 
   <div>
     <div class="phone">
       <header>아빠 위치 <span class="chip">공유 중</span></header>
       <div class="body">
-        <div class="map"><div class="route"></div><div class="car-pin"></div><div class="stop">🍗 OO치킨</div><div class="home">🏠 집</div></div>
-        <div class="card"><div class="t">도착 예정</div><div style="font-size:24px; font-weight:700">19:20 <span class="t">· 약 22분</span></div><div class="t" style="margin-top:4px">OO치킨 들렀다 오는 중</div></div>
+        <div class="map"><div class="route"></div><div class="car-pin"></div><div class="home">🏠 집</div></div>
+        <div class="card"><div class="t">도착 예정</div><div style="font-size:24px; font-weight:700">19:41 <span class="t">· OO치킨 들렀다 오는 중</span></div></div>
         <div class="card t">아빠가 집에 도착하면 공유가 자동으로 끝나요.</div>
       </div>
       <div class="tab"><div>대화</div><div class="on">위치</div><div>영상·목소리</div><div>설정</div></div>
     </div>
-    <p class="cap">③ 아빠 위치 — 아빠가 수락했을 때만 보인다. 도착하면 자동 종료 (C1, C2, F6). 지도는 시안용 그림.</p>
+    <p class="cap">④ 위치 보기 — 공유 중일 때만 지도와 도착 예정 시간 (B3, E3). 도착하면 자동 종료 (B4).</p>
   </div>
 
   <div>
@@ -234,22 +420,22 @@
       <header>영상·목소리</header>
       <div class="body">
         <div class="card">
-          <div class="t">출발 인사 영상</div>
+          <div class="t">인사 영상 (시동 · 도착)</div>
           <div class="thumb"><span>▶</span></div>
-          <div class="t" style="margin-top:6px">"아빠 오늘도 화이팅~" · 0:12</div>
+          <div class="t" style="margin-top:6px">"아빠 오늘도 고생 많았어" · 0:12</div>
         </div>
         <div class="card">
-          <div class="t" style="margin-bottom:4px">가족 목소리 (이럴 때 들려줘요)</div>
-          <div class="line"><span>졸릴 때 "아빠 일어나!!"</span><span class="ok">● 녹음됨</span></div>
-          <div class="line"><span>졸릴 때 "아빠 괜찮아?"</span><span class="ok">● 녹음됨</span></div>
-          <div class="line"><span>오래 운전할 때</span><span class="no">○ 기본 음성</span></div>
-          <div class="line" style="border:none"><span>늦은 퇴근 출발</span><span class="no">○ 기본 음성</span></div>
+          <div class="t" style="margin-bottom:4px">중요한 순간에 들려줄 목소리</div>
+          <div class="line"><span>"아빠, 이번에 오른쪽으로 나가야 돼"</span><span class="ok">● 녹음됨</span></div>
+          <div class="line"><span>"아빠, 이번에 왼쪽으로 가야 돼"</span><span class="ok">● 녹음됨</span></div>
+          <div class="line"><span>"괜찮아, 다음에서 나가면 돼"</span><span class="no">○ 기본 음성</span></div>
+          <div class="line" style="border:none"><span>"오래 달렸네, 쉬었다 가자"</span><span class="ok">● 녹음됨</span></div>
         </div>
-        <div class="btn">🎥 도착 인사 찍기</div>
+        <div class="btn">🎥 인사 영상 찍기</div>
       </div>
       <div class="tab"><div>대화</div><div>위치</div><div class="on">영상·목소리</div><div>설정</div></div>
     </div>
-    <p class="cap">④ 영상·목소리 — 출발·도착 인사 영상 촬영 (F4), 상황별 멘트 녹음 (F5, 5-3). 녹음하지 않은 멘트는 기본 음성. 녹음은 서버에서 자동 보정.</p>
+    <p class="cap">⑤ 영상·목소리 — 인사 영상 (E5), 멘트 네 개 녹음 (D7, E6). 녹음하지 않은 멘트는 TTS 기본 음성. 녹음은 서버에서 자동 보정.</p>
   </div>
 
 </div>
